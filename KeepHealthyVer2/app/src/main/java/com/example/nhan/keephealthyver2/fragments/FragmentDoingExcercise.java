@@ -85,10 +85,12 @@ public class FragmentDoingExcercise extends Fragment {
         EventBus.getDefault().register(this);
 
         tvNameSession.setText(breathObject.getName());
-        Picasso.with(view.getContext())
-                .load(breathObject.getImage())
-                .fit()
-                .centerCrop().into(imageViewBreath);
+//        Picasso.with(view.getContext())
+//                .load(breathObject.getImage())
+//                .fit()
+//                .centerCrop().into(imageViewBreath);
+
+        imageViewBreath.setImageResource(R.drawable.progress_breath);
         breathProgress.setProgressWidth(20);
         countRound = 1;
         tvNumsRound.setText("Round " + countRound + "/" + round);

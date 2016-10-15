@@ -35,13 +35,13 @@ public class ChooseExerciseViewHolder extends RecyclerView.ViewHolder {
         tvName.setText("Breath Exercise: " + breath.getName());
         itemView.setTag(breath);
     }
-    public void setDataPhysical(ExercisesPhysicalRealmObject breath){
+    public void setDataPhysical(ExercisesPhysicalRealmObject physical){
         Picasso.with(itemView.getContext())
-                .load(breath.getLinkImage())
+                .load(physical.getLinkImage())
                 .fit()
                 .centerCrop()
                 .into(imageView);
-        tvName.setText("Physical Exercise: " + breath.getName());
-        itemView.setTag(breath);
+        tvName.setText(physical.getName());
+        itemView.setTag(physical);
     }
 }

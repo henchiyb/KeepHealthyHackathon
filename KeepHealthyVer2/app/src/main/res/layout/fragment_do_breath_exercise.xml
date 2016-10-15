@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:text="Deep Breath"
             android:textSize="30sp"
-            android:textColor="#fd6100"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/tv_name_session"
             android:layout_marginTop="8dp"/>
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#fd6100"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             android:id="@+id/tv_nums_round" />
         <FrameLayout
@@ -53,8 +53,8 @@
                 seekarc:rotation="360"
                 seekarc:arcWidth="10dp"
                 seekarc:progressWidth="10dp"
-                seekarc:progressColor="@color/colorPrimary"
-                app:arcColor="#fd6100"
+                seekarc:progressColor="@color/colorWhite"
+                app:arcColor="@color/colorPrimary"
                 />
         </FrameLayout>
         <TextView
@@ -66,7 +66,7 @@
             android:text="0s"
             android:textStyle="bold"
             android:gravity="center"
-            android:textColor="#fd6100"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp"
             android:lines="2"
             />
@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:id="@+id/tv_information"
             android:gravity="center"
-            android:textColor="#fd6100"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp"
             android:lines="2"
             />
@@ -85,7 +85,7 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_weight="0.05"
-            android:background="#fd6100"
+            android:background="@color/colorPrimaryDark"
             android:layout_marginBottom="16dp"/>
 
         <ImageButton
