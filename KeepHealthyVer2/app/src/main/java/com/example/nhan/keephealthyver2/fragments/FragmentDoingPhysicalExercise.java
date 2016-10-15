@@ -1,5 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.events.EventSendPhysicalObject;
 import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
@@ -69,6 +71,8 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     private int currentIndexPhysicalRealmObject;
     private TextToSpeech textToSpeech;
 
+    private MediaPlayer mediaPlayer;
+
     @Subscribe(sticky = true)
     public void receiveBreathExercise(EventSendPhysicalObject event) {
         this.exercisesPhysicalRealmObject = event.getPhysicalRealmObject();
@@ -99,7 +103,9 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     @Override
     public void onResume() {
         super.onResume();
-
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_PHYSICAL);
+        mediaPlayer.start();
         currentIndexPhysicalRealmObject = 0;
         currentCircuit = 1;
         tvNumRound.setText("Round: " + currentCircuit + "/" + totalCircuit);
@@ -186,6 +192,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
             doneEx = false;
             currentCircuit = 1;
             currentIndexPhysicalRealmObject = 0;
+            getClassicExerciseData();
             tvNumRound.setText("Round " + currentCircuit + "/" + totalCircuit);
             tvDetails.setText(physicalRealmObject.getName());
             textToSpeech.speak(tvDetails.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
@@ -225,5 +232,11 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
             cdtDoExercise.cancel();
         textToSpeech.stop();
         textToSpeech.shutdown();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
     }
 }

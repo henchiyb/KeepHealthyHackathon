@@ -113,7 +113,7 @@ public class FragmentDoingOfficeExercise extends Fragment {
     public void onResume() {
         super.onResume();
         mediaPlayer = new MediaPlayer();
-        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_BREATH);
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_OFICE);
         mediaPlayer.start();
         timer = new CountDownTimer(time * 1000, 10) {
             @Override

@@ -125,7 +125,7 @@ public class FragmentChooseOfficeExercise extends Fragment implements View.OnCli
     public void onResume() {
         super.onResume();
         mediaPlayer = new MediaPlayer();
-        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_BREATH);
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_OFICE);
         mediaPlayer.start();
     }
 
