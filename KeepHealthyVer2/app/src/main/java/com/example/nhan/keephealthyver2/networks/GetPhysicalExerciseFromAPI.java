@@ -1,0 +1,59 @@
+package com.example.nhan.keephealthyver2.networks;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+
+/**
+ * Created by Nhan on 10/14/2016.
+ */
+
+public interface GetPhysicalExerciseFromAPI {
+    @GET(ApiUrl.API_URL_PHYSICAL)
+    Call<Physical> callPhysicalExercise();
+    class Physical{
+        @SerializedName("physical")
+        private List<ExercisePhysical> exercisePhysicalList;
+
+        public List<ExercisePhysical> getExercisePhysicalList() {
+            return exercisePhysicalList;
+        }
+    }
+
+    class ExercisePhysical {
+        @SerializedName("name")
+        private String name;
+        @SerializedName("id")
+        private String id;
+        @SerializedName("color")
+        private String color;
+        @SerializedName("image")
+        private String image;
+        @SerializedName("youtube_video")
+        private String linkYoutube;
+
+        public String getLinkYoutube() {
+            return linkYoutube;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+
+        public String getId() {
+            return id;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public String getImage() {
+            return image;
+        }
+    }
+}
