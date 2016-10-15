@@ -1,6 +1,7 @@
 package com.example.nhan.keephealthyver2.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.speech.tts.TextToSpeech;
 
 import java.util.Locale;
@@ -22,5 +23,12 @@ public class Utils {
             }
         });
         return t1;
+    }
+
+    public static void setLoadData(Context context, String key, boolean isLoaded) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("SP", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, isLoaded);
+        editor.commit();
     }
 }

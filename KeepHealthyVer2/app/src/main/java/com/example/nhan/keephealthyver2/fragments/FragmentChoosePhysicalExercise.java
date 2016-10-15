@@ -1,5 +1,7 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import com.example.nhan.keephealthyver2.R;
 import com.example.nhan.keephealthyver2.adapters.ChoosePhysicalRecycleViewAdapter;
+import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.database.RealmHandler;
 import com.example.nhan.keephealthyver2.events.EventDataReady;
 import com.example.nhan.keephealthyver2.events.EventSendPhysicalObject;
@@ -21,6 +24,7 @@ import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 import com.example.nhan.keephealthyver2.networks.ApiUrl;
 import com.example.nhan.keephealthyver2.networks.GetPhysicalExerciseFromAPI;
 import com.example.nhan.keephealthyver2.networks.ServiceFactory;
+import com.example.nhan.keephealthyver2.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -85,7 +89,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
     }
 
     public void loadDataByRetrofit(){
-        if (RealmHandler.getInstance().getListBreathObjectFromRealm().size() == 0) {
+        if (!Constant.isLoadedPhysicalExercise) {
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             GetPhysicalExerciseFromAPI service = serviceFactory.createService(GetPhysicalExerciseFromAPI.class);
             Call<GetPhysicalExerciseFromAPI.Physical> call = service.callPhysicalExercise();
@@ -113,6 +117,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
                         RealmHandler.getInstance().addExercisesPhysicalObjectToRealm(exercise);
                     }
                     EventBus.getDefault().post(new EventDataReady());
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedPhysicalExercise, true);
                 }
 
                 @Override

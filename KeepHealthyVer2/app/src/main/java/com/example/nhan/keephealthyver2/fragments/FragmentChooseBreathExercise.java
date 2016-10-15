@@ -14,6 +14,7 @@ import android.widget.GridLayout;
 
 import com.example.nhan.keephealthyver2.R;
 import com.example.nhan.keephealthyver2.adapters.ChooseBreathRecycleViewAdapter;
+import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.database.RealmHandler;
 import com.example.nhan.keephealthyver2.events.EventDataReady;
 import com.example.nhan.keephealthyver2.events.EventSendBreathObject;
@@ -22,6 +23,7 @@ import com.example.nhan.keephealthyver2.models.StringRealmObject;
 import com.example.nhan.keephealthyver2.networks.ApiUrl;
 import com.example.nhan.keephealthyver2.networks.GetBreathExerciseFromAPI;
 import com.example.nhan.keephealthyver2.networks.ServiceFactory;
+import com.example.nhan.keephealthyver2.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -83,7 +85,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
     }
 
     public void loadDataByRetrofit(){
-        if (RealmHandler.getInstance().getListBreathObjectFromRealm().size() == 0) {
+        if (!Constant.isLoadedBreathExercise) {
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             GetBreathExerciseFromAPI service = serviceFactory.createService(GetBreathExerciseFromAPI.class);
             Call<GetBreathExerciseFromAPI.Breath> call = service.callBreathExercise();
@@ -111,6 +113,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
                         RealmHandler.getInstance().addBreathObjectToRealm(breathRealmObject);
                     }
                     EventBus.getDefault().post(new EventDataReady());
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedBreathExercise, true);
                 }
 
                 @Override

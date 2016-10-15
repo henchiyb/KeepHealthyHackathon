@@ -1,6 +1,9 @@
 package com.example.nhan.keephealthyver2.application;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+
+import com.example.nhan.keephealthyver2.constants.Constant;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -17,5 +20,9 @@ public class MyApplication extends Application {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SP", MODE_PRIVATE);
+        Constant.isLoadedBreathExercise = sharedPreferences.getBoolean(Constant.keyLoadedBreathExercise, false);
+        Constant.isLoadedPhysicalExercise = sharedPreferences.getBoolean(Constant.keyLoadedPhysicalExercise, false);
     }
 }
