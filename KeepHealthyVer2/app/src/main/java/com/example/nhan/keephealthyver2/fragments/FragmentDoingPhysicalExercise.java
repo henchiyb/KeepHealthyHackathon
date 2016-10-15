@@ -96,7 +96,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
         }
 
         btnPlayPhysical.setOnClickListener(this);
-
+        imageViewPhysic.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -178,7 +178,6 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
         textToSpeech.speak(tvDetails.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
         imageViewPhysic.setImageResource(getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",
                         getContext().getPackageName()));
-        imageViewPhysic.setVisibility(View.INVISIBLE);
         Log.d("abcd", "id: " + getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",
                 getContext().getPackageName()));
     }
@@ -187,12 +186,12 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     public void createTimerEnd(String event) {
         if (event.equals("PLAY")){
             Log.d("test", "PLAY");
-            imageViewPhysic.setVisibility(View.VISIBLE);
             doneCircuit = false;
             doneEx = false;
             currentCircuit = 1;
             currentIndexPhysicalRealmObject = 0;
             getClassicExerciseData();
+            imageViewPhysic.setVisibility(View.VISIBLE);
             tvNumRound.setText("Round " + currentCircuit + "/" + totalCircuit);
             tvDetails.setText(physicalRealmObject.getName());
             textToSpeech.speak(tvDetails.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
