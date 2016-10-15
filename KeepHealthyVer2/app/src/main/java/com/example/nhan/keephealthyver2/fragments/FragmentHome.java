@@ -1,5 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.constants.Constant;
+import com.example.nhan.keephealthyver2.utils.Utils;
 
 /**
  * Created by Nhan on 10/14/2016.
@@ -19,6 +22,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private Button btClassicExercise;
     private Button btSetting;
     private Button btBreathExercise;
+    private MediaPlayer mediaPlayer;
 
     @Nullable
     @Override
@@ -52,5 +56,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 openFragment(new FragmentChooseBreathExercise());
                 break;
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_HOME);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
     }
 }

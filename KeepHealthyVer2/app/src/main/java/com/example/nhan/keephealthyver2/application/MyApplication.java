@@ -17,7 +17,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(getApplicationContext())
-                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 

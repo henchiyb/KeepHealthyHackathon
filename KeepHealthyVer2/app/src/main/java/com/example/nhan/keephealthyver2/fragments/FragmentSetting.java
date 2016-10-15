@@ -2,6 +2,7 @@ package com.example.nhan.keephealthyver2.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.constants.Constant;
+import com.example.nhan.keephealthyver2.utils.Utils;
 
 /**
  * Created by Nhan on 10/14/2016.
@@ -31,6 +34,8 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    private MediaPlayer mediaPlayer;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -125,5 +130,18 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
                 break;
             }
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_HOME);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
     }
 }

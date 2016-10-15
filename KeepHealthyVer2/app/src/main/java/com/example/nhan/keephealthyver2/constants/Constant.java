@@ -13,4 +13,8 @@ public class Constant {
     public static boolean isLoadedPhysicalExercise;
     public static String keyLoadedBreathExercise = "keyLoadedBreathExercise";
     public static String keyLoadedPhysicalExercise = "keyLoadedPhysicalExercise";
+    public static final String MUSIC_NAME_PREF = "musicNamePref";
+    public static final String MUSIC_PHYSICAL = "8_bit_mayhem.mp3";
+    public static final String MUSIC_BREATH = "nhacthiennhien.mp3";
+    public static final String MUSIC_HOME = "RightHereWaitingForYou.mp3";
 }

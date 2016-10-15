@@ -1,5 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.events.EventSendBreathObject;
 import com.example.nhan.keephealthyver2.models.BreathRealmObject;
 import com.example.nhan.keephealthyver2.utils.Utils;
@@ -57,6 +59,8 @@ public class FragmentDoingExcercise extends Fragment {
     private ScaleAnimation ZoomOut;
     private ScaleAnimation zoomIn;
 
+    private MediaPlayer mediaPlayer;
+
     @OnClick(R.id.btn_play_progress_breath)
     public void onClick(){
         if(isPlay){
@@ -85,10 +89,6 @@ public class FragmentDoingExcercise extends Fragment {
         EventBus.getDefault().register(this);
 
         tvNameSession.setText(breathObject.getName());
-//        Picasso.with(view.getContext())
-//                .load(breathObject.getImage())
-//                .fit()
-//                .centerCrop().into(imageViewBreath);
 
         imageViewBreath.setImageResource(R.drawable.progress_breath);
         breathProgress.setProgressWidth(20);
@@ -127,6 +127,9 @@ public class FragmentDoingExcercise extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_BREATH);
+        mediaPlayer.start();
         timer = new CountDownTimer(time * 1000, 10) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -191,5 +194,11 @@ public class FragmentDoingExcercise extends Fragment {
             timer.cancel();
             textToSpeech.stop();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
     }
 }

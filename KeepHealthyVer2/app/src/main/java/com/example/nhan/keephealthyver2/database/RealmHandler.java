@@ -60,9 +60,14 @@ public class RealmHandler {
         return realm.where(BreathRealmObject.class).equalTo("name", name).findFirst();
     }
 
-    public void clearDataInRealm(){
+    public void clearDataBreathInRealm(){
         realm.beginTransaction();
-        realm.deleteAll();
+        realm.delete(BreathRealmObject.class);
+        realm.commitTransaction();
+    }
+    public void clearDataPhysicalInRealm(){
+        realm.beginTransaction();
+        realm.delete(ExercisesPhysicalRealmObject.class);
         realm.commitTransaction();
     }
 

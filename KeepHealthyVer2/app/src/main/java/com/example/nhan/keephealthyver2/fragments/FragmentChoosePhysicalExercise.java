@@ -2,6 +2,7 @@ package com.example.nhan.keephealthyver2.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,8 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
     private ChoosePhysicalRecycleViewAdapter adapter;
     private ServiceFactory serviceFactory;
     private PhysicalRealmObject physicalObject;
+    private MediaPlayer mediaPlayer;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +76,19 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_PHYSICAL);
+        mediaPlayer.start();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -96,7 +111,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
             call.enqueue(new Callback<GetPhysicalExerciseFromAPI.Physical>() {
                 @Override
                 public void onResponse(Call<GetPhysicalExerciseFromAPI.Physical> call, Response<GetPhysicalExerciseFromAPI.Physical> response) {
-                    RealmHandler.getInstance().clearDataInRealm();
+                    RealmHandler.getInstance().clearDataPhysicalInRealm();
                     List<GetPhysicalExerciseFromAPI.Exercises> exercisesList = response.body().getExercisesList();
                     for (int i = 0; i < exercisesList.size(); i++){
                         ExercisesPhysicalRealmObject exercise = new ExercisesPhysicalRealmObject();
@@ -128,7 +143,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
 
 
         } else {
-            EventBus.getDefault().postSticky(new EventDataReady());
+            EventBus.getDefault().post(new EventDataReady());
         }
     }
 

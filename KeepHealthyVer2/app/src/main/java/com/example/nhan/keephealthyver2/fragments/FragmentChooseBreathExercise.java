@@ -1,5 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,8 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
     private ChooseBreathRecycleViewAdapter adapter;
     private ServiceFactory serviceFactory;
     private BreathRealmObject breathObject;
+
+    private MediaPlayer mediaPlayer;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,7 +95,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
             call.enqueue(new Callback<GetBreathExerciseFromAPI.Breath>() {
                 @Override
                 public void onResponse(Call<GetBreathExerciseFromAPI.Breath> call, Response<GetBreathExerciseFromAPI.Breath> response) {
-                    RealmHandler.getInstance().clearDataInRealm();
+                    RealmHandler.getInstance().clearDataBreathInRealm();
                     List<GetBreathExerciseFromAPI.ExerciseBreath> exerciseBreathList = response.body().getExerciseBreathList();
 
                     for (int i = 0; i < exerciseBreathList.size(); i++){
@@ -123,8 +126,22 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
             });
 
         } else {
-            EventBus.getDefault().postSticky(new EventDataReady());
+            EventBus.getDefault().post(new EventDataReady());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mediaPlayer = new MediaPlayer();
+        Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_BREATH);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mediaPlayer.release();
     }
 
     @Override
@@ -139,4 +156,5 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
     }
+
 }
