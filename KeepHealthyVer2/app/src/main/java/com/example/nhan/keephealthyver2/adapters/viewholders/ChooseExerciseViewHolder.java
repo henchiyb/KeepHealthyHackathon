@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.nhan.keephealthyver2.models.BreathRealmObject;
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 import com.squareup.picasso.Picasso;
 
@@ -34,9 +35,9 @@ public class ChooseExerciseViewHolder extends RecyclerView.ViewHolder {
         tvName.setText("Breath Exercise: " + breath.getName());
         itemView.setTag(breath);
     }
-    public void setDataPhysical(PhysicalRealmObject breath){
+    public void setDataPhysical(ExercisesPhysicalRealmObject breath){
         Picasso.with(itemView.getContext())
-                .load(breath.getImage())
+                .load(breath.getLinkImage())
                 .fit()
                 .centerCrop()
                 .into(imageView);

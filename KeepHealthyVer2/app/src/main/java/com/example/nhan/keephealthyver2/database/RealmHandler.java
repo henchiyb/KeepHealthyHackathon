@@ -1,6 +1,7 @@
 package com.example.nhan.keephealthyver2.database;
 
 import com.example.nhan.keephealthyver2.models.BreathRealmObject;
+import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.StringRealmObject;
 
@@ -31,14 +32,14 @@ public class RealmHandler {
         realm.commitTransaction();
     }
 
-    public void addPhysicalObjectToRealm(PhysicalRealmObject genres){
+    public void addExercisesPhysicalObjectToRealm(ExercisesPhysicalRealmObject exercisesPhysicalRealmObject){
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(genres);
+        realm.copyToRealmOrUpdate(exercisesPhysicalRealmObject);
         realm.commitTransaction();
     }
 
-    public List<PhysicalRealmObject> getListPhysicalObjectFromRealm(){
-        return realm.where(PhysicalRealmObject.class).findAll();
+    public List<ExercisesPhysicalRealmObject> getListPhysicalObjectFromRealm(){
+        return realm.where(ExercisesPhysicalRealmObject.class).findAll();
     }
 
     public void addBreathObjectToRealm(BreathRealmObject genres){

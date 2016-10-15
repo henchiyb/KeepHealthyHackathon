@@ -16,7 +16,28 @@ public interface GetPhysicalExerciseFromAPI {
     Call<Physical> callPhysicalExercise();
     class Physical{
         @SerializedName("physical")
+        private List<Exercises> exercisesList;
+
+        public List<Exercises> getExercisesList() {
+            return exercisesList;
+        }
+    }
+
+    class Exercises{
+        @SerializedName("exercise")
         private List<ExercisePhysical> exercisePhysicalList;
+        @SerializedName("name")
+        private String name;
+        @SerializedName("image")
+        private String linkImage;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getLinkImage() {
+            return linkImage;
+        }
 
         public List<ExercisePhysical> getExercisePhysicalList() {
             return exercisePhysicalList;

@@ -21,7 +21,7 @@
             android:textSize="15sp"
             android:textAllCaps="true"
             android:padding="16dp"
-            android:background="#bb0d0d0d"
+            android:background="#b72c3ca6"
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>

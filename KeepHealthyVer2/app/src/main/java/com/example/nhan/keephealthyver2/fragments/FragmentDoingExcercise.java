@@ -1,7 +1,5 @@
 package com.example.nhan.keephealthyver2.fragments;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -13,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -54,6 +54,9 @@ public class FragmentDoingExcercise extends Fragment {
     private TextToSpeech textToSpeech;
     private BreathRealmObject breathObject;
 
+    private ScaleAnimation ZoomOut;
+    private ScaleAnimation zoomIn;
+
     @OnClick(R.id.btn_play_progress_breath)
     public void onClick(){
         if(isPlay){
@@ -89,6 +92,13 @@ public class FragmentDoingExcercise extends Fragment {
         breathProgress.setProgressWidth(20);
         countRound = 1;
         tvNumsRound.setText("Round " + countRound + "/" + round);
+        ZoomOut =  new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        ZoomOut.setDuration(5000);
+        ZoomOut.setFillAfter(true);
+
+        zoomIn =  new ScaleAnimation(1f, 0f, 1f, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        zoomIn.setDuration(5000);
+        zoomIn.setFillAfter(true);
 
         time = breathObject.getTime();
         Log.d("test", time+"");
@@ -128,6 +138,9 @@ public class FragmentDoingExcercise extends Fragment {
                 timer.cancel();
                 if (countSpeak < breathObject.getListStringGuide().size() - 1) {
                     countSpeak++;
+                    if(countSpeak == (breathObject.getListStringGuide().size() - 1)){
+                        imageViewBreath.startAnimation(zoomIn);
+                    }
                     tvInformation.setText(breathObject.getListStringGuide().get(countSpeak).getString());
                     textToSpeech.speak(tvInformation.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                 } else {
@@ -135,6 +148,7 @@ public class FragmentDoingExcercise extends Fragment {
                     countRound++;
                     if (countRound <= round) {
                         tvNumsRound.setText("Round " + countRound + "/" + round);
+                        imageViewBreath.startAnimation(ZoomOut);
                         tvInformation.setText(breathObject.getListStringGuide().get(countSpeak).getString());
                         textToSpeech.speak(tvInformation.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                     } else {
@@ -164,6 +178,7 @@ public class FragmentDoingExcercise extends Fragment {
             Log.d("test", "PLAY");
             countRound = 1;
             countSpeak = 0;
+            imageViewBreath.startAnimation(ZoomOut);
             tvNumsRound.setText("Round " + countRound + "/" + round);
             tvInformation.setText(breathObject.getListStringGuide().get(countSpeak).getString());
             textToSpeech.speak(tvInformation.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);

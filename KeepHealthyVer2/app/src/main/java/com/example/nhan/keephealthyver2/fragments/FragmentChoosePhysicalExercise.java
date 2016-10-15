@@ -11,25 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
-
 import com.example.nhan.keephealthyver2.R;
-import com.example.nhan.keephealthyver2.adapters.ChooseBreathRecycleViewAdapter;
 import com.example.nhan.keephealthyver2.adapters.ChoosePhysicalRecycleViewAdapter;
 import com.example.nhan.keephealthyver2.database.RealmHandler;
 import com.example.nhan.keephealthyver2.events.EventDataReady;
-import com.example.nhan.keephealthyver2.events.EventSendBreathObject;
 import com.example.nhan.keephealthyver2.events.EventSendPhysicalObject;
-import com.example.nhan.keephealthyver2.models.BreathRealmObject;
+import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
-import com.example.nhan.keephealthyver2.models.StringRealmObject;
 import com.example.nhan.keephealthyver2.networks.ApiUrl;
-import com.example.nhan.keephealthyver2.networks.GetBreathExerciseFromAPI;
 import com.example.nhan.keephealthyver2.networks.GetPhysicalExerciseFromAPI;
 import com.example.nhan.keephealthyver2.networks.ServiceFactory;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.RealmList;
@@ -66,6 +62,10 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
         });
         recyclerView.setLayoutManager(layoutManager);
         loadDataByRetrofit();
+        adapter = new ChoosePhysicalRecycleViewAdapter();
+        adapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return view;
     }
@@ -93,17 +93,24 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
                 @Override
                 public void onResponse(Call<GetPhysicalExerciseFromAPI.Physical> call, Response<GetPhysicalExerciseFromAPI.Physical> response) {
                     RealmHandler.getInstance().clearDataInRealm();
-                    List<GetPhysicalExerciseFromAPI.ExercisePhysical> exercisePhysicalList = response.body().getExercisePhysicalList();
-
-                    for (int i = 0; i < exercisePhysicalList.size(); i++){
-                        PhysicalRealmObject physicalObject = new PhysicalRealmObject();
-                        physicalObject.setName(exercisePhysicalList.get(i).getName());
-                        physicalObject.setId(exercisePhysicalList.get(i).getId());
-                        physicalObject.setColor(exercisePhysicalList.get(i).getColor());
-                        physicalObject.setImage(exercisePhysicalList.get(i).getImage());
-                        physicalObject.setLinkYoutube(exercisePhysicalList.get(i).getLinkYoutube());
-
-                        RealmHandler.getInstance().addPhysicalObjectToRealm(physicalObject);
+                    List<GetPhysicalExerciseFromAPI.Exercises> exercisesList = response.body().getExercisesList();
+                    for (int i = 0; i < exercisesList.size(); i++){
+                        ExercisesPhysicalRealmObject exercise = new ExercisesPhysicalRealmObject();
+                        RealmList<PhysicalRealmObject> list = new RealmList<>();
+                        List<GetPhysicalExerciseFromAPI.ExercisePhysical> exercisePhysicList = exercisesList.get(i).getExercisePhysicalList();
+                        for(int j = 0; j < exercisePhysicList.size(); j++) {
+                            PhysicalRealmObject physicalObject = new PhysicalRealmObject();
+                            physicalObject.setName(exercisePhysicList.get(j).getName());
+                            physicalObject.setId(exercisePhysicList.get(j).getId());
+                            physicalObject.setColor(exercisePhysicList.get(j).getColor());
+                            physicalObject.setImage(exercisePhysicList.get(j).getImage());
+                            physicalObject.setLinkYoutube(exercisePhysicList.get(j).getLinkYoutube());
+                            list.add(physicalObject);
+                        }
+                        exercise.setName(exercisesList.get(i).getName());
+                        exercise.setLinkImage(exercisesList.get(i).getLinkImage());
+                        exercise.setListPhysicalObject(list);
+                        RealmHandler.getInstance().addExercisesPhysicalObjectToRealm(exercise);
                     }
                     EventBus.getDefault().post(new EventDataReady());
                 }

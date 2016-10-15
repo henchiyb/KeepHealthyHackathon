@@ -62,6 +62,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
             }
         });
         recyclerView.setLayoutManager(layoutManager);
+        Log.d("Response", "response");
         loadDataByRetrofit();
 
         return view;
@@ -89,7 +90,6 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
             call.enqueue(new Callback<GetBreathExerciseFromAPI.Breath>() {
                 @Override
                 public void onResponse(Call<GetBreathExerciseFromAPI.Breath> call, Response<GetBreathExerciseFromAPI.Breath> response) {
-                    Log.d("Response", response.code() + "");
                     RealmHandler.getInstance().clearDataInRealm();
                     List<GetBreathExerciseFromAPI.ExerciseBreath> exerciseBreathList = response.body().getExerciseBreathList();
 

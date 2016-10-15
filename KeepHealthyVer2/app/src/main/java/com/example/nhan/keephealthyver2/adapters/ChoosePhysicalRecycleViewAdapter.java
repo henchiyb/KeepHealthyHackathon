@@ -9,6 +9,7 @@ import com.example.nhan.keephealthyver2.R;
 import com.example.nhan.keephealthyver2.adapters.viewholders.ChooseExerciseViewHolder;
 import com.example.nhan.keephealthyver2.database.RealmHandler;
 import com.example.nhan.keephealthyver2.models.BreathRealmObject;
+import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 public class ChoosePhysicalRecycleViewAdapter extends RecyclerView.Adapter<ChooseExerciseViewHolder> {
-    List<PhysicalRealmObject> objectList = RealmHandler.getInstance().getListPhysicalObjectFromRealm();
+    List<ExercisesPhysicalRealmObject> objectList = RealmHandler.getInstance().getListPhysicalObjectFromRealm();
     private View.OnClickListener onItemClickListener;
 
     public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
