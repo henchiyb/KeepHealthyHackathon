@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Nhan on 10/14/2016.
  */
 
-public class FragmentDoingExcercise extends Fragment {
+public class FragmentDoingBreathExcercise extends Fragment {
 
     private int round = 2;
     @BindView(R.id.progress_breath)SeekArc breathProgress;

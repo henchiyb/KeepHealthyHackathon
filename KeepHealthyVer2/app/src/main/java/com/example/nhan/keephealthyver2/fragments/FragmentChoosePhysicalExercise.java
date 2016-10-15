@@ -50,6 +50,8 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
     private PhysicalRealmObject physicalObject;
     private MediaPlayer mediaPlayer;
 
+    private ExercisesPhysicalRealmObject exercisesPhysicalRealmObject;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,7 +124,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
                             physicalObject.setName(exercisePhysicList.get(j).getName());
                             physicalObject.setId(exercisePhysicList.get(j).getId());
                             physicalObject.setColor(exercisePhysicList.get(j).getColor());
-                            physicalObject.setImage(exercisePhysicList.get(j).getImage());
+                            physicalObject.setImageGif(exercisePhysicList.get(j).getImage());
                             physicalObject.setLinkYoutube(exercisePhysicList.get(j).getLinkYoutube());
                             list.add(physicalObject);
                         }
@@ -149,9 +151,9 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
 
     @Override
     public void onClick(View v) {
-        physicalObject = (PhysicalRealmObject) v.getTag();
-        EventBus.getDefault().postSticky( new EventSendPhysicalObject(physicalObject));
-        openFragment(new FragmentDoingExcercise());
+        exercisesPhysicalRealmObject = (ExercisesPhysicalRealmObject) v.getTag();
+        EventBus.getDefault().postSticky( new EventSendPhysicalObject(exercisesPhysicalRealmObject));
+        openFragment(new FragmentDoingPhysicalExercise());
     }
     private void openFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();

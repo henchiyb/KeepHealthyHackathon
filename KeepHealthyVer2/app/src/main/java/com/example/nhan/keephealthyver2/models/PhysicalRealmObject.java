@@ -11,8 +11,16 @@ public class PhysicalRealmObject extends RealmObject {
     private String name;
     @PrimaryKey private String id;
     private String color;
-    private String image;
+    private String imageGif;
     private String linkYoutube;
+
+    public String getImageGif() {
+        return imageGif;
+    }
+
+    public void setImageGif(String imageGif) {
+        this.imageGif = imageGif;
+    }
 
     public String getName() {
         return name;
@@ -36,14 +44,6 @@ public class PhysicalRealmObject extends RealmObject {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getLinkYoutube() {

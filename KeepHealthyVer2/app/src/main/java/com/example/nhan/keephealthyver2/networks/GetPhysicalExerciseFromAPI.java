@@ -51,7 +51,7 @@ public interface GetPhysicalExerciseFromAPI {
         private String id;
         @SerializedName("color")
         private String color;
-        @SerializedName("image")
+        @SerializedName("image_gif")
         private String image;
         @SerializedName("youtube_video")
         private String linkYoutube;

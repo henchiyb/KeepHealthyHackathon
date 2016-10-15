@@ -148,7 +148,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
     public void onClick(View v) {
         breathObject = (BreathRealmObject) v.getTag();
         EventBus.getDefault().postSticky( new EventSendBreathObject(breathObject));
-        openFragment(new FragmentDoingExcercise());
+        openFragment(new FragmentDoingBreathExcercise());
     }
     private void openFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
