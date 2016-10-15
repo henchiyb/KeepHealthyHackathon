@@ -94,16 +94,15 @@ public class FragmentDoingExcercise extends Fragment {
         breathProgress.setProgressWidth(20);
         countRound = 1;
         tvNumsRound.setText("Round " + countRound + "/" + round);
+
+        time = breathObject.getTime();
         ZoomOut =  new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        ZoomOut.setDuration(5000);
+        ZoomOut.setDuration(time * 1000);
         ZoomOut.setFillAfter(true);
 
         zoomIn =  new ScaleAnimation(1f, 0f, 1f, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        zoomIn.setDuration(5000);
+        zoomIn.setDuration(time * 1000);
         zoomIn.setFillAfter(true);
-
-        time = breathObject.getTime();
-        Log.d("test", time+"");
         textToSpeech = Utils.textToSpeech(getActivity().getApplicationContext());
 
         if(!FragmentSetting.voiceInstructor){
