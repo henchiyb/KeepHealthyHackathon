@@ -169,6 +169,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     public void getClassicExerciseData() {
         physicalRealmObject = physicalRealmObjectList.get(currentIndexPhysicalRealmObject);
         tvDetails.setText(physicalRealmObject.getName());
+        textToSpeech.speak(tvDetails.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
         imageViewPhysic.setImageResource(getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",
                         getContext().getPackageName()));
         Log.d("abcd", "id: " + getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",

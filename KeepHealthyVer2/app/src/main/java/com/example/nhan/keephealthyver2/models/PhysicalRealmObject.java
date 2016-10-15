@@ -8,8 +8,8 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class PhysicalRealmObject extends RealmObject {
-    private String name;
-    @PrimaryKey private String id;
+    @PrimaryKey private String name;
+    private String id;
     private String color;
     private String imageGif;
     private String linkYoutube;
