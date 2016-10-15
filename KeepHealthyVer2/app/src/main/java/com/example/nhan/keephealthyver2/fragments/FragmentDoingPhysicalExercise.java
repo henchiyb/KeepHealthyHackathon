@@ -114,11 +114,11 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
 
             @Override
             public void onFinish() {
+                cdtDoExercise.cancel();
                 currentIndexPhysicalRealmObject++;
                 if (currentIndexPhysicalRealmObject <= (physicalRealmObjectList.size()-1)) {
                     getClassicExerciseData();
                 }
-                cdtRest.start();
                 if (doneCircuit) {
                     tvDetails.setText(R.string.finished_exercise);
                     Log.d("abcd", "currentCircuit" + currentCircuit);
@@ -133,6 +133,9 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
                     tvDetails.setText("Round: " + currentCircuit + "/" + totalCircuit);
                     doneEx = false;
                     getClassicExerciseData();
+                    cdtRest.start();
+                } else {
+                    cdtRest.start();
                 }
             }
         };
@@ -147,9 +150,8 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
 
             @Override
             public void onFinish() {
-                cdtDoExercise.start();
                 cdtRest.cancel();
-                //done 1 vong
+
                 if (currentIndexPhysicalRealmObject == physicalRealmObjectList.size()-1) {
                     doneEx = true;
                 }
@@ -157,6 +159,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
                 if ((currentCircuit == totalCircuit) && (currentIndexPhysicalRealmObject == physicalRealmObjectList.size()-1)) {
                     doneCircuit = true;
                 }
+                cdtDoExercise.start();
             }
         };
 
@@ -187,6 +190,11 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
         } else if ( event.equals("CANCEL")){
             Log.d("test", "CANCEL");
             textToSpeech.stop();
+            if (cdtRest != null)
+                cdtRest.cancel();
+            if (cdtDoExercise != null)
+                cdtDoExercise.cancel();
+
         }
     }
 
@@ -201,5 +209,17 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
             btnPlayPhysical.setImageResource(R.drawable.ic_loop_black_24dp);
             EventBus.getDefault().post("PLAY");
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+        if (cdtRest != null)
+            cdtRest.cancel();
+        if (cdtDoExercise != null)
+            cdtDoExercise.cancel();
+        textToSpeech.stop();
+        textToSpeech.shutdown();
     }
 }

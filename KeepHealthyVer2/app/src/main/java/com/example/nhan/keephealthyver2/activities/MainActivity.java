@@ -2,6 +2,7 @@ package com.example.nhan.keephealthyver2.activities;
 
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,10 @@ import android.widget.Toast;
 import com.example.nhan.keephealthyver2.R;
 import com.example.nhan.keephealthyver2.fragments.FragmentHome;
 import com.example.nhan.keephealthyver2.fragments.FragmentSetting;
+import com.example.nhan.keephealthyver2.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
+//    public final TextToSpeech textToSpeed = Utils.textToSpeech(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
