@@ -1,7 +1,5 @@
 package com.example.nhan.keephealthyver2.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,14 +21,13 @@ import com.example.nhan.keephealthyver2.events.EventSendPhysicalObject;
 import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 import com.example.nhan.keephealthyver2.networks.ApiUrl;
-import com.example.nhan.keephealthyver2.networks.GetPhysicalExerciseFromAPI;
+import com.example.nhan.keephealthyver2.networks.interfaces.GetPhysicalExerciseFromAPI;
 import com.example.nhan.keephealthyver2.networks.ServiceFactory;
 import com.example.nhan.keephealthyver2.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.RealmList;

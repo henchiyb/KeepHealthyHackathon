@@ -1,5 +1,6 @@
-package com.example.nhan.keephealthyver2.networks;
+package com.example.nhan.keephealthyver2.networks.interfaces;
 
+import com.example.nhan.keephealthyver2.networks.ApiUrl;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

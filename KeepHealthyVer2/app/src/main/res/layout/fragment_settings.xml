@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Voice Instructor"
+            android:text="@string/voice_instructor"
             android:padding="@dimen/activity_horizontal_margin"
             android:textSize="16sp"
             android:layout_centerVertical="true"
@@ -41,6 +41,30 @@
             android:textOn=""
             android:layout_alignParentRight="true"
             android:id="@+id/toggle_voice"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/music"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:textColor="#000000"/>
+
+        <ToggleButton
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/custom_toggle"
+            android:textOff=""
+            android:textOn=""
+            android:layout_alignParentRight="true"
+            android:id="@+id/toggle_music"
             />
 
     </RelativeLayout>
@@ -65,30 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Random Order"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:textSize="16sp"
-                android:layout_centerVertical="true"
-                android:textColor="#000000"/>
 
-            <ToggleButton
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:background="@drawable/custom_toggle"
-                android:textOff=""
-                android:textOn=""
-                android:layout_alignParentRight="true"
-                android:id="@+id/toggle_random"
-                />
-
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

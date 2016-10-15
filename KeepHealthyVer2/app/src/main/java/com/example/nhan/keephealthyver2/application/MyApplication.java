@@ -25,5 +25,6 @@ public class MyApplication extends Application {
         SharedPreferences sharedPreferences = getSharedPreferences("SP", MODE_PRIVATE);
         Constant.isLoadedBreathExercise = sharedPreferences.getBoolean(Constant.keyLoadedBreathExercise, false);
         Constant.isLoadedPhysicalExercise = sharedPreferences.getBoolean(Constant.keyLoadedPhysicalExercise, false);
+        Constant.isLoadedOfficeExercise = sharedPreferences.getBoolean(Constant.keyLoadedOfficeExercise, false);
     }
 }

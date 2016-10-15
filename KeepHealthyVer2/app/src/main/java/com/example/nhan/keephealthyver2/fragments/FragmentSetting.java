@@ -23,7 +23,7 @@ import com.example.nhan.keephealthyver2.utils.Utils;
  */
 
 public class FragmentSetting extends Fragment implements View.OnClickListener {
-    private ToggleButton tgVoice, tgRandomOrder;
+    private ToggleButton tgVoice, tgMusic;
     private TextView tvTimeExercise, tvTimeRest;
     private ImageView ivMinusEx, ivMinusRest, ivPlusEx, ivPlusRest;
 
@@ -48,7 +48,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
 
     private void initLayout(View view) {
         tgVoice = (ToggleButton) view.findViewById(R.id.toggle_voice);
-        tgRandomOrder = (ToggleButton) view.findViewById(R.id.toggle_random);
+        tgMusic = (ToggleButton) view.findViewById(R.id.toggle_music);
         tvTimeExercise = (TextView) view.findViewById(R.id.tv_time_ex);
         tvTimeRest = (TextView) view.findViewById(R.id.tv_time_rest);
         ivMinusEx = (ImageView) view.findViewById(R.id.iv_minus_ex);
@@ -59,18 +59,25 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     }
 
     private void initData() {
+        mediaPlayer = new MediaPlayer();
         sharedPreferences = getActivity().getSharedPreferences("sharePref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-
+        if (Utils.getIntFromPreference(getContext(), Constant.MUSIC_NAME_PREF) == 0){
+            tgMusic.setChecked(true);
+            mediaPlayer.setVolume(1.0f, 1.0f);
+        } else {
+            tgMusic.setChecked(false);
+            mediaPlayer.setVolume(0, 0);
+        }
         tgVoice.setChecked(voiceInstructor);
-        tgRandomOrder.setChecked(randomOrder);
+        tgMusic.setChecked(randomOrder);
         tvTimeExercise.setText(timeExercise+"s");
         tvTimeRest.setText(timeRest+"s");
     }
 
     private void addListeners() {
         tgVoice.setOnClickListener(this);
-        tgRandomOrder.setOnClickListener(this);
+        tgMusic.setOnClickListener(this);
         ivMinusRest.setOnClickListener(this);
         ivPlusRest.setOnClickListener(this);
         ivMinusEx.setOnClickListener(this);
@@ -86,11 +93,14 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
                 editor.apply();
                 break;
             }
-            case R.id.toggle_random: {
-                Log.d("abcd", "tgrandom");
-                tgRandomOrder.setChecked(tgRandomOrder.isChecked());
-                editor.putBoolean("randomOrder", tgRandomOrder.isChecked());
-                editor.apply();
+            case R.id.toggle_music: {
+                if(tgMusic.isChecked()){
+                    Utils.saveIntToPreference(getContext(), Constant.MUSIC_NAME_PREF, 0);
+                    mediaPlayer.setVolume(1.0f, 1.0f);
+                } else {
+                    Utils.saveIntToPreference(getContext(), Constant.MUSIC_NAME_PREF, 1);
+                    mediaPlayer.setVolume(0, 0);
+                }
                 break;
             }
             case R.id.iv_minus_ex: {
@@ -134,7 +144,6 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mediaPlayer = new MediaPlayer();
         Utils.setDataSourceForMediaPlayer(this.getContext(), mediaPlayer, Constant.MUSIC_HOME);
         mediaPlayer.start();
     }

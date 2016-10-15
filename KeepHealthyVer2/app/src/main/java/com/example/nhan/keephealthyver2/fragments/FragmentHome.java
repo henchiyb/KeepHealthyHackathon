@@ -53,7 +53,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 openFragment(new FragmentSetting());
                 break;
             case R.id.bt_breath_exercise:
-                openFragment(new FragmentChooseBreathExercise());
+                openFragment(new FragmentChooseOfficeExercise());
                 break;
         }
     }

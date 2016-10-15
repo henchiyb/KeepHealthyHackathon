@@ -172,6 +172,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
         textToSpeech.speak(tvDetails.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
         imageViewPhysic.setImageResource(getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",
                         getContext().getPackageName()));
+        imageViewPhysic.setVisibility(View.INVISIBLE);
         Log.d("abcd", "id: " + getActivity().getResources().getIdentifier(physicalRealmObject.getImageGif(), "drawable",
                 getContext().getPackageName()));
     }
@@ -180,6 +181,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     public void createTimerEnd(String event) {
         if (event.equals("PLAY")){
             Log.d("test", "PLAY");
+            imageViewPhysic.setVisibility(View.VISIBLE);
             doneCircuit = false;
             doneEx = false;
             currentCircuit = 1;
@@ -190,6 +192,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
             cdtRest.start();
         } else if ( event.equals("CANCEL")){
             Log.d("test", "CANCEL");
+            imageViewPhysic.setVisibility(View.INVISIBLE);
             textToSpeech.stop();
             if (cdtRest != null)
                 cdtRest.cancel();

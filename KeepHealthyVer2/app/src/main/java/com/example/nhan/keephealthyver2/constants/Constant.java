@@ -11,8 +11,10 @@ import com.example.nhan.keephealthyver2.application.MyApplication;
 public class Constant {
     public static boolean isLoadedBreathExercise;
     public static boolean isLoadedPhysicalExercise;
+    public static boolean isLoadedOfficeExercise;
     public static String keyLoadedBreathExercise = "keyLoadedBreathExercise";
     public static String keyLoadedPhysicalExercise = "keyLoadedPhysicalExercise";
+    public static String keyLoadedOfficeExercise = "keyLoadedOfficeExercise";
     public static final String MUSIC_NAME_PREF = "musicNamePref";
     public static final String MUSIC_PHYSICAL = "8_bit_mayhem.mp3";
     public static final String MUSIC_BREATH = "nhacthiennhien.mp3";
