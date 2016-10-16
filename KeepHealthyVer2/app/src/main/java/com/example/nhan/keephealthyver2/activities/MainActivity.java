@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.nhan.keephealthyver2.R;
+import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.fragments.FragmentHome;
 import com.example.nhan.keephealthyver2.fragments.FragmentSetting;
 import com.example.nhan.keephealthyver2.utils.Utils;
@@ -35,12 +36,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences("sharePref", MODE_PRIVATE);
-        FragmentSetting.voiceInstructor = sharedPreferences.getBoolean("voiceInstructor", true);
-        FragmentSetting.randomOrder = sharedPreferences.getBoolean("randomOrder", false);
-        Log.d("abcd", "random " + FragmentSetting.randomOrder);
-        FragmentSetting.timeExercise = sharedPreferences.getInt("timeExercise", 10);
-        FragmentSetting.timeRest = sharedPreferences.getInt("timeRest", 5);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.NAME_PREF, MODE_PRIVATE);
+        FragmentSetting.voiceInstructor = sharedPreferences.getBoolean(Constant.VOICE_INSTRUCTOR, true);
     }
     boolean doubleBackToExitPressedOnce = false;
 

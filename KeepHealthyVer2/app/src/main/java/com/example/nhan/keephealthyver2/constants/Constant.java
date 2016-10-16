@@ -20,7 +20,6 @@ public class Constant {
     public static final String MUSIC_BREATH = "nhacthiennhien.mp3";
     public static final String MUSIC_HOME = "RightHereWaitingForYou.mp3";
     public static final String MUSIC_OFICE = "ILikeToMoveIt.mp3";
-    public static final String OFICE = "Office";
-    public static final String BREATH = "Breath";
-    public static final String PHYSICAL = "Physical";
+    public static final String NAME_PREF = "sharePref";
+    public static final String VOICE_INSTRUCTOR = "voiceInstructor";
 }
