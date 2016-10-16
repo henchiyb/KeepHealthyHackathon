@@ -18,7 +18,6 @@ import com.example.nhan.keephealthyver2.adapters.ChooseOfficeRecycleViewAdapter;
 import com.example.nhan.keephealthyver2.constants.Constant;
 import com.example.nhan.keephealthyver2.database.RealmHandler;
 import com.example.nhan.keephealthyver2.events.EventDataReady;
-import com.example.nhan.keephealthyver2.events.EventSendBreathObject;
 import com.example.nhan.keephealthyver2.events.EventSendOfficeObject;
 import com.example.nhan.keephealthyver2.models.OfficeRealmObject;
 import com.example.nhan.keephealthyver2.networks.ApiUrl;
@@ -50,7 +49,7 @@ public class FragmentChooseOfficeExercise extends Fragment implements View.OnCli
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_choose_breath_exercise, container, false);
+        View view =inflater.inflate(R.layout.fragment_choose_exercise, container, false);
 
         EventBus.getDefault().register(this);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view_breath);

@@ -39,6 +39,12 @@ public interface GetBreathExerciseFromAPI {
         private List<Label> listGuide;
         @SerializedName("info")
         private String info;
+        @SerializedName("youtube_video")
+        private String linkYoutube;
+
+        public String getLinkYoutube() {
+            return linkYoutube;
+        }
 
         public String getInfo() {
             return info;

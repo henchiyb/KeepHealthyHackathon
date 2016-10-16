@@ -3,7 +3,6 @@ package com.example.nhan.keephealthyver2.database;
 import com.example.nhan.keephealthyver2.models.BreathRealmObject;
 import com.example.nhan.keephealthyver2.models.ExercisesPhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.OfficeRealmObject;
-import com.example.nhan.keephealthyver2.models.PhysicalRealmObject;
 import com.example.nhan.keephealthyver2.models.StringRealmObject;
 
 import java.util.List;

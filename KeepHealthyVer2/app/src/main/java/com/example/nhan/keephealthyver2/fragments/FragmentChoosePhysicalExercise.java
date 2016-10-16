@@ -44,7 +44,6 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
     private GridLayoutManager layoutManager;
     private ChoosePhysicalRecycleViewAdapter adapter;
     private ServiceFactory serviceFactory;
-    private PhysicalRealmObject physicalObject;
     private MediaPlayer mediaPlayer;
 
     private ExercisesPhysicalRealmObject exercisesPhysicalRealmObject;
@@ -52,7 +51,7 @@ public class FragmentChoosePhysicalExercise extends Fragment implements View.OnC
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_choose_breath_exercise, container, false);
+        View view =inflater.inflate(R.layout.fragment_choose_exercise, container, false);
 
         EventBus.getDefault().register(this);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view_breath);

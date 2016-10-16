@@ -52,7 +52,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_choose_breath_exercise, container, false);
+        View view =inflater.inflate(R.layout.fragment_choose_exercise, container, false);
 
         EventBus.getDefault().register(this);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view_breath);
@@ -106,6 +106,7 @@ public class FragmentChooseBreathExercise extends Fragment implements View.OnCli
                         breathRealmObject.setImage(exerciseBreathList.get(i).getImage());
                         breathRealmObject.setTime(exerciseBreathList.get(i).getTime());
                         breathRealmObject.setInfo(exerciseBreathList.get(i).getInfo());
+                        breathRealmObject.setLinkYoutube(exerciseBreathList.get(i).getLinkYoutube());
                         List<GetBreathExerciseFromAPI.Label> listGuideString = exerciseBreathList.get(i).getListGuide();
                         RealmList<StringRealmObject> list = new RealmList<>();
                         for (int j = 0; j < listGuideString.size(); j ++){

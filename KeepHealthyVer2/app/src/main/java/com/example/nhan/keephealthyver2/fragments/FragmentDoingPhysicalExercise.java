@@ -1,6 +1,8 @@
 package com.example.nhan.keephealthyver2.fragments;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -52,6 +54,17 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     TextView tvCountTime;
     @BindView(R.id.iv_gif)
     GifImageView imageViewPhysic;
+    @BindView(R.id.bt_youtube_physical)
+    ImageButton btYoutube;
+    @OnClick(R.id.bt_youtube_physical)
+    public void onClickBtYoutube(){
+        Intent youtubeIntent = new Intent(Intent.ACTION_VIEW);
+        youtubeIntent.setData(Uri.parse(exercisesPhysicalRealmObject.
+                getListPhysicalObject()
+                .get(currentIndexPhysicalRealmObject)
+                .getLinkYoutube()));
+        startActivity(youtubeIntent);
+    }
 
     private Boolean isPlay = false;
     private ExercisesPhysicalRealmObject exercisesPhysicalRealmObject;
@@ -68,7 +81,7 @@ public class FragmentDoingPhysicalExercise extends Fragment implements View.OnCl
     private int totalCircuit = 2;
     private boolean doneCircuit;
 
-    private int currentIndexPhysicalRealmObject;
+    private int currentIndexPhysicalRealmObject = 0;
     private TextToSpeech textToSpeech;
 
     private MediaPlayer mediaPlayer;
