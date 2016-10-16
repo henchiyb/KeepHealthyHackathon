@@ -1,8 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -46,7 +44,6 @@ public class FragmentDoingOfficeExercise extends Fragment {
     @BindView(R.id.tv_information_office)TextView tvInformation;
     @BindView(R.id.tv_time_count_office)TextView tvCountTime;
     @BindView(R.id.office_image_view_do_exercise)GifImageView imageViewOffice;
-    @BindView(R.id.bt_youtube_office)ImageButton btYoutube;
 
     private Boolean isPlay = false;
     private CountDownTimer timer;
@@ -69,13 +66,6 @@ public class FragmentDoingOfficeExercise extends Fragment {
         }
     }
 
-//    @OnClick(R.id.bt_youtube_breath)
-//    public void onClickBtYoutube(){
-//        Intent youtubeIntent = new Intent(Intent.ACTION_VIEW);
-//        youtubeIntent.setData(Uri.parse(officeObject.get()));
-//        startActivity(youtubeIntent);
-//    }
-
     @Subscribe(sticky = true)
     public void receiveOfficeExercise(EventSendOfficeObject event){
         this.officeObject = event.getOfficeRealmObject();
@@ -91,7 +81,6 @@ public class FragmentDoingOfficeExercise extends Fragment {
         EventBus.getDefault().register(this);
 
         tvNameSession.setText(officeObject.getName());
-        btYoutube.setVisibility(View.GONE);
 
         imageViewOffice.setImageResource(getActivity().getResources().getIdentifier(officeObject.getImageGif(), "drawable",
                 getContext().getPackageName()));
@@ -103,7 +92,7 @@ public class FragmentDoingOfficeExercise extends Fragment {
         time = officeObject.getTime();
         textToSpeech = Utils.textToSpeech(getActivity().getApplicationContext());
 
-        if(!FragmentSetting.voiceInstructor){
+        if(!Constant.voiceInstructor){
             textToSpeech.shutdown();
         }
 

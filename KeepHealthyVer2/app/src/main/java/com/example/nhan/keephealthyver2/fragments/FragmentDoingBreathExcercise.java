@@ -1,8 +1,6 @@
 package com.example.nhan.keephealthyver2.fragments;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
@@ -41,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentDoingBreathExcercise extends Fragment {
 
-    private int round = 2;
+    private int round = Constant.timeRound;
     @BindView(R.id.progress_breath)SeekArc breathProgress;
     @BindView(R.id.btn_play_progress_breath)ImageButton btnPlayBreath;
     @BindView(R.id.tv_name_session)TextView tvNameSession;
@@ -49,7 +47,6 @@ public class FragmentDoingBreathExcercise extends Fragment {
     @BindView(R.id.tv_information)TextView tvInformation;
     @BindView(R.id.tv_time_count_breath)TextView tvCountTime;
     @BindView(R.id.breath_image_view_do_exercise)CircleImageView imageViewBreath;
-    @BindView(R.id.bt_youtube_breath)ImageButton btYoutube;
 
     private Boolean isPlay = false;
     private CountDownTimer timer;
@@ -75,13 +72,6 @@ public class FragmentDoingBreathExcercise extends Fragment {
             btnPlayBreath.setImageResource(R.drawable.ic_loop_black_24dp);
             EventBus.getDefault().post("PLAY");
         }
-    }
-
-    @OnClick(R.id.bt_youtube_breath)
-    public void onClickBtYoutube(){
-        Intent youtubeIntent = new Intent(Intent.ACTION_VIEW);
-        youtubeIntent.setData(Uri.parse(breathObject.getLinkYoutube()));
-        startActivity(youtubeIntent);
     }
 
     @Subscribe(sticky = true)
@@ -115,7 +105,7 @@ public class FragmentDoingBreathExcercise extends Fragment {
         zoomIn.setFillAfter(true);
         textToSpeech = Utils.textToSpeech(getActivity().getApplicationContext());
 
-        if(!FragmentSetting.voiceInstructor){
+        if(!Constant.voiceInstructor){
             textToSpeech.shutdown();
         }
 
